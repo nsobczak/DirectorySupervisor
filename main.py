@@ -10,12 +10,6 @@ import logging
 import sys
 import argparse
 
-# log format
-# logging.basicConfig(datefmt='', format='%asctime', level=logging.INFO)
-logging.basicConfig(datefmt="%d/%m/%Y-%H:%M:%S", \
-                    format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
-                    level=logging.INFO)
-
 
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
@@ -26,19 +20,26 @@ frequence = None
 depth = None
 dp = None
 lp = None
+logger = None
+
 
 # ____________________________________________________________________________________________________
-# Fonctions de ...
+# Fonctions d'initialisation
 
+def initLog():
+    # log format
+    # logging.basicConfig(datefmt='', format='%asctime', level=logging.INFO)
+    logging.basicConfig(filename='DirectorySupervisor.log',
+                        datefmt="%d/%m/%Y-%H:%M:%S", \
+                        format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
+                        level=logging.INFO)
+    logging.info("Programme lancé")
 
-
-# ___________________________________________________________________________________________________
-# Fonctions principales
 
 def initVariablesGlobales():
     """
-    Fonction qui initialise les variables globales en fonction de ce que l'utilisateur a entré.
-    La fonction génère une info récapitulant la liste des paramètres entrés.
+    Fonction qui initialise les variables globales en fonction de ce que l'utilisateur a entre.
+    La fonction genere une info récapitulant la liste des parametres entres.
     """
     global dp
     global lp
@@ -60,8 +61,13 @@ def initVariablesGlobales():
     depth = args.depth
     frequence = args.frequence
     # affichage des arguments rentres
-    logging.info(":\npath to the directory : %s \npath where to generate log : %s \ndepth of the directory : %s \nfrequency : %s hz\n", dp,  lp, depth, frequence)
+    logging.info(
+        ":\npath to the directory : %s \npath where to generate log : %s \ndepth of the directory : %s \nfrequency : %s hz\n",
+        dp, lp, depth, frequence)
 
+
+# ___________________________________________________________________________________________________
+# Fonctions principales
 
 def loop():
     """
@@ -76,6 +82,7 @@ def loop():
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
 def monMain():
+    initLog()
     logging.info("Parametres entres : sys.argv = %s", sys.argv)
     initVariablesGlobales()
     # loop()
