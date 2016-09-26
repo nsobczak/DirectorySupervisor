@@ -1,0 +1,32 @@
+24/09/2016-19:05:38 INFO initLog Programme lancé
+24/09/2016-19:05:38 INFO monMain Parametres entres : sys.argv = ['/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 - DirectorySupervisor/main.py', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test', '-f', '12', '-d', '3']
+24/09/2016-19:05:38 INFO initVariablesGlobales :
+path to the directory : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 
+path where to generate log : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test 
+depth of the directory : 3 
+frequency : 12 hz
+
+24/09/2016-19:06:40 INFO initLog Programme lancé
+24/09/2016-19:06:40 INFO monMain Parametres entres : sys.argv = ['/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 - DirectorySupervisor/main.py', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test', '-f', '12', '-d', '3']
+24/09/2016-19:06:40 INFO initVariablesGlobales :
+path to the directory : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 
+path where to generate log : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test 
+depth of the directory : 3 
+frequency : 12 hz
+
+24/09/2016-19:07:04 INFO initLog Programme lancé
+24/09/2016-19:07:04 INFO monMain Parametres entres : sys.argv = ['/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 - DirectorySupervisor/main.py', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test', '-f', '12', '-d', '3']
+24/09/2016-19:07:04 INFO initVariablesGlobales :
+path to the directory : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 
+path where to generate log : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test 
+depth of the directory : 3 
+frequency : 12 hz
+
+25/09/2016-21:52:29 INFO initLog Programme lancé
+25/09/2016-21:52:29 INFO monMain Parametres entres : sys.argv = ['/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 - DirectorySupervisor/main.py', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1', '/media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test', '-f', '12', '-d', '3']
+25/09/2016-21:52:29 INFO initVariablesGlobales :
+path to the directory : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/TP1 
+path where to generate log : /media/nicolas/DE581D27581CFFC7/Users/Nicolas/Mes documents/Ecole/ISEN/Python/Test 
+depth of the directory : 3 
+frequency : 12 hz
+
