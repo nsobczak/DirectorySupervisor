@@ -1,7 +1,8 @@
-########
+#######
 # TP1 #
-########
+#######
 
+# TODO : Arbres
 # ____________________________________________________________________________________________________
 # Config
 
@@ -9,7 +10,6 @@
 import logging
 import sys
 import argparse
-
 
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
@@ -26,13 +26,16 @@ logger = None
 # ____________________________________________________________________________________________________
 # Fonctions d'initialisation
 
-def initLog():
-    # log format
-    # logging.basicConfig(datefmt='', format='%asctime', level=logging.INFO)
-    logging.basicConfig(filename='DirectorySupervisor.log',
-                        datefmt="%d/%m/%Y-%H:%M:%S", \
-                        format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
-                        level=logging.INFO)
+def initLog(logPath):
+    """
+    log format
+    logging.basicConfig(datefmt='', format='%asctime', level=logging.INFO)
+    """
+    logging.basicConfig(
+        filename=logPath + "/DirectorySupervisor.log", \
+        datefmt="%d/%m/%Y-%H:%M:%S", \
+        format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
+        level=logging.INFO)  # 'filename': '/path/to/DirectorySupervisor.debug.log',
     logging.info("Programme lancé")
 
 
@@ -60,7 +63,10 @@ def initVariablesGlobales():
     lp = args.lp
     depth = args.depth
     frequence = args.frequence
-    # affichage des arguments rentres
+
+
+def afficheArgument():
+    """affichage des arguments rentres"""
     logging.info(
         ":\npath to the directory : %s \npath where to generate log : %s \ndepth of the directory : %s \nfrequency : %s hz\n",
         dp, lp, depth, frequence)
@@ -82,10 +88,10 @@ def loop():
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
 def monMain():
-    initLog()
-    logging.info("Parametres entres : sys.argv = %s", sys.argv)
     initVariablesGlobales()
-    # loop()
+    initLog(lp)
+    afficheArgument()
+    loop()
 
 
 if __name__ == "__main__":
