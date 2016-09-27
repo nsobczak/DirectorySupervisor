@@ -2,7 +2,7 @@
 # TP1 #
 #######
 
-# TODO : Remplacer print des arbres par des logs + créer fonction loop
+# TODO : Remplacer les noms des fonctions arbre par des noms français + créer fonction loop
 # ____________________________________________________________________________________________________
 # Config
 
@@ -77,7 +77,7 @@ def afficheArgument():
 # ___________________________________________________________________________________________________
 # Fonctions de creation de l'arbre du dossier et de comparaison
 
-def creatSurveyList(tree):
+def createSurveyList(tree):
     """
     create a list of tupples form by (fileName, dateOfLastModif) corresponding to the files in the tree
     """
@@ -87,9 +87,9 @@ def creatSurveyList(tree):
         path, dirs, files = tree[i]
         level = path.count(os.sep) - startinglevel
         if (level <= depth_max):
-            print('### depth ', level, ' ### ', path, ' #####')
-            print("Sous dossiers : %s" % dirs)
-            print("Fichiers : %s" % files)
+            logging.info('### depth ', level, ' ### ', path, ' #####')
+            logging.info("Sous dossiers : %s" % dirs)
+            logging.info("Fichiers : %s" % files)
             for file in files:
                 modifTime = os.path.getmtime(os.path.join(path, file))
                 listOfModifFiles += [(file, modifTime)]
@@ -140,17 +140,17 @@ def logTheMADLists(M, A, D):
     		-D = deleted files
     """
     if len(M):
-        print("M")
+        logging.info("M")
         for (mFile, mTime) in M:
-            print(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime)), mFile, " is modified")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime)), mFile, " is modified")
     if len(A):
-        print("A")
+        logging.info("A")
         for (aFile, aTime) in A:
-            print(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime)), aFile, " is added")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime)), aFile, " is added")
     if len(D):
-        print("D")
+        logging.info("D")
         for (dFile, dTime) in D:
-            print(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime)), dFile, " is deleted")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime)), dFile, " is deleted")
 
 
 # ___________________________________________________________________________________________________
