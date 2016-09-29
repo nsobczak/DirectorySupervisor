@@ -17,12 +17,14 @@ import time
 # ____________________________________________________________________________________________________
 # Variables globales
 
-arbrePrecedent = None
-startinglevel = None
-frequence = None
-depth = None
+
 dp = None
 lp = None
+depth = None
+frequence = None
+
+arbrePrecedent = None
+startinglevel = None
 logger = None
 
 
@@ -64,8 +66,8 @@ def initVariablesGlobales():
     args = parser.parse_args()
     dp = args.dp
     lp = args.lp
-    depth = args.depth
-    frequence = args.frequence
+    depth = int(args.depth)
+    frequence = int(args.frequence)
 
 
 def afficheArgument():
@@ -146,15 +148,15 @@ def logTheMADLists(M, A, D):
     if len(M):
         logging.info("M")
         for (mFile, mTime) in M:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime))+ str(mFile)+ " is modified")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime))+" "+ str(mFile)+ " is modified")
     if len(A):
         logging.info("A")
         for (aFile, aTime) in A:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime))+ str(aFile)+  " is added")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime))+" "+ str(aFile)+  " is added")
     if len(D):
         logging.info("D")
         for (dFile, dTime) in D:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime))+ str(dFile)+  " is deleted")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime))+" last time "+ str(dFile)+  " is vied berfore delete")
 
 
 # ___________________________________________________________________________________________________
@@ -173,7 +175,7 @@ def loop():
     while totalTime < 60 :
         newTime = time.time()
         if (newTime - oldTime) > (1/frequence):
-            logging.info(str(totalTime)+" sec depuis lancement du programme")
+            logging.info(str(totalTime/frequence)+" sec depuis lancement du programme")
             oldTime = time.time()
             nouvelArbre = createSurveyList(list(os.walk(dp)))
             M, A, D = comparateSurveyList(arbrePrecedent,nouvelArbre)
