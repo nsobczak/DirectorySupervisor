@@ -22,10 +22,10 @@ dp = None
 lp = None
 depth = None
 frequence = None
-
 arbrePrecedent = None
 startinglevel = None
 logger = None
+supervisionTime = None
 
 
 # ____________________________________________________________________________________________________
@@ -53,6 +53,9 @@ def initVariablesGlobales():
     global lp
     global depth
     global frequence
+    global supervisionTime
+    global startinglevel
+    global arbrePrecedent
 
     parser = argparse.ArgumentParser(description='Supervision de dossier')
     # obligatoire
@@ -61,6 +64,7 @@ def initVariablesGlobales():
     # optionnel
     parser.add_argument("-d", "--depth", default=2, help="depth of the directory")
     parser.add_argument("-f", "--frequence", default=1, help="add frequency in hz")
+    parser.add_argument("-st", "--supervisionTime", default=60, help="add supervision time (in s)")
 
     # initialisation des parametres globaux
     args = parser.parse_args()
@@ -68,6 +72,9 @@ def initVariablesGlobales():
     lp = args.lp
     depth = int(args.depth)
     frequence = int(args.frequence)
+    supervisionTime = int(args.supervisionTime)
+    startinglevel = dp.count(os.sep)        # indique le niveau de profondeur initiale
+    arbrePrecedent = createSurveyList(list(os.walk(dp)))
 
 
 def afficheArgument():
@@ -90,15 +97,15 @@ def createSurveyList(tree):
         path, dirs, files = tree[i]
         level = path.count(os.sep) - startinglevel
         if (level <= depth):
-            #logging.info('### depth '+ str(level) + ' ### ' + str(path)+ ' #####')
-            #logging.info("Sous dossiers : %s" % dirs)
-            #logging.info("Fichiers : %s" % files)
-            for dir in dirs :
+            logging.debug('### depth ' + str(level) + ' ### ' + str(path) + ' #####')
+            logging.debug("Sous dossiers : %s" % dirs)
+            logging.debug("Fichiers : %s" % files)
+            for dir in dirs:
                 modifTime = os.path.getmtime(os.path.join(path, dir))
                 listOfModifFiles += [(path + '/' + dir, modifTime)]
             for file in files:
                 modifTime = os.path.getmtime(os.path.join(path, file))
-                listOfModifFiles += [(path+'/'+file, modifTime)]
+                listOfModifFiles += [(path + '/' + file, modifTime)]
         i += 1
     return (listOfModifFiles)
 
@@ -112,7 +119,7 @@ def comparateSurveyList(oldListe, newListe):
 		- for the deleted files
 	"""
     if oldListe == newListe:
-        return [],[],[]
+        return [], [], []
     else:
         listOfSupprFiles = []
         listOfAddFiles = []
@@ -148,15 +155,17 @@ def logTheMADLists(M, A, D):
     if len(M):
         logging.info("M")
         for (mFile, mTime) in M:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime))+" "+ str(mFile)+ " is modified")
+            logging.info(
+                time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime)) + " " + str(mFile) + " is modified")
     if len(A):
         logging.info("A")
         for (aFile, aTime) in A:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime))+" "+ str(aFile)+  " is added")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime)) + " " + str(aFile) + " is added")
     if len(D):
         logging.info("D")
         for (dFile, dTime) in D:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime))+" last time "+ str(dFile)+  " is vied berfore delete")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime)) + " last time " + str(
+                dFile) + " is vied berfore delete")
 
 
 # ___________________________________________________________________________________________________
@@ -172,32 +181,26 @@ def loop():
     totalTime = 0
     oldTime = time.time()
     newTime = time.time()
-    while totalTime < 60 :
+    while totalTime < (supervisionTime*frequence):
         newTime = time.time()
-        if (newTime - oldTime) > (1/frequence):
-            logging.info(str(totalTime/frequence)+" sec depuis lancement du programme")
+        if (newTime - oldTime) > (1 / frequence):
+            logging.debug(str(totalTime / frequence) + " sec depuis lancement du programme")
             oldTime = time.time()
             nouvelArbre = createSurveyList(list(os.walk(dp)))
-            M, A, D = comparateSurveyList(arbrePrecedent,nouvelArbre)
-            if len(M) or len(A) or len(D) :
+            M, A, D = comparateSurveyList(arbrePrecedent, nouvelArbre)
+            if len(M) or len(A) or len(D):
                 arbrePrecedent = nouvelArbre
-                logTheMADLists(M,A,D)
+                logTheMADLists(M, A, D)
             totalTime += 1
-
-
     return 1
 
 
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
 def monMain():
-    global arbrePrecedent
-    global startinglevel
     initVariablesGlobales()
     initLog(lp)
     afficheArgument()
-    startinglevel = dp.count(os.sep) #indique le niveau de profondeur initiale
-    arbrePrecedent = createSurveyList(list(os.walk(dp)))
     loop()
 
 
