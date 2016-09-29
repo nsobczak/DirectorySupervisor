@@ -18,6 +18,7 @@ import time
 # Variables globales
 
 arbrePrecedent = None
+startinglevel = None
 frequence = None
 depth = None
 dp = None
@@ -86,13 +87,16 @@ def createSurveyList(tree):
     while (i < len(tree)):
         path, dirs, files = tree[i]
         level = path.count(os.sep) - startinglevel
-        if (level <= depth_max):
-            logging.info('### depth ', level, ' ### ', path, ' #####')
-            logging.info("Sous dossiers : %s" % dirs)
-            logging.info("Fichiers : %s" % files)
+        if (level <= depth):
+            #logging.info('### depth '+ str(level) + ' ### ' + str(path)+ ' #####')
+            #logging.info("Sous dossiers : %s" % dirs)
+            #logging.info("Fichiers : %s" % files)
+            for dir in dirs :
+                modifTime = os.path.getmtime(os.path.join(path, dir))
+                listOfModifFiles += [(path + '/' + dir, modifTime)]
             for file in files:
                 modifTime = os.path.getmtime(os.path.join(path, file))
-                listOfModifFiles += [(file, modifTime)]
+                listOfModifFiles += [(path+'/'+file, modifTime)]
         i += 1
     return (listOfModifFiles)
 
@@ -106,7 +110,7 @@ def comparateSurveyList(oldListe, newListe):
 		- for the deleted files
 	"""
     if oldListe == newListe:
-        return None
+        return [],[],[]
     else:
         listOfSupprFiles = []
         listOfAddFiles = []
@@ -142,15 +146,15 @@ def logTheMADLists(M, A, D):
     if len(M):
         logging.info("M")
         for (mFile, mTime) in M:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime)), mFile, " is modified")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(mTime))+ str(mFile)+ " is modified")
     if len(A):
         logging.info("A")
         for (aFile, aTime) in A:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime)), aFile, " is added")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(aTime))+ str(aFile)+  " is added")
     if len(D):
         logging.info("D")
         for (dFile, dTime) in D:
-            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime)), dFile, " is deleted")
+            logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime))+ str(dFile)+  " is deleted")
 
 
 # ___________________________________________________________________________________________________
@@ -162,6 +166,22 @@ def loop():
 	sinon
 		compareArbre()
     """
+    global arbrePrecedent
+    totalTime = 0
+    oldTime = time.time()
+    newTime = time.time()
+    while totalTime < 60 :
+        newTime = time.time()
+        if (newTime - oldTime) > (1/frequence):
+            logging.info(str(totalTime)+" sec depuis lancement du programme")
+            oldTime = time.time()
+            nouvelArbre = createSurveyList(list(os.walk(dp)))
+            M, A, D = comparateSurveyList(arbrePrecedent,nouvelArbre)
+            if len(M) or len(A) or len(D) :
+                arbrePrecedent = nouvelArbre
+                logTheMADLists(M,A,D)
+            totalTime += 1
+
 
     return 1
 
@@ -169,9 +189,13 @@ def loop():
 # ____________________________________________________________________________________________________
 # ____________________________________________________________________________________________________
 def monMain():
+    global arbrePrecedent
+    global startinglevel
     initVariablesGlobales()
     initLog(lp)
     afficheArgument()
+    startinglevel = dp.count(os.sep) #indique le niveau de profondeur initiale
+    arbrePrecedent = createSurveyList(list(os.walk(dp)))
     loop()
 
 
