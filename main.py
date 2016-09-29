@@ -40,7 +40,7 @@ def initLog(logPath):
         filename=logPath + "/DirectorySupervisor.log", \
         datefmt="%d/%m/%Y-%H:%M:%S", \
         format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
-        level=logging.INFO)  # 'filename': '/path/to/DirectorySupervisor.debug.log',
+        level=logging.INFO)     # 'filename': '/path/to/DirectorySupervisor.debug.log',
     logging.info("Programme lance")
 
 
@@ -165,7 +165,7 @@ def logTheMADLists(M, A, D):
         logging.info("D")
         for (dFile, dTime) in D:
             logging.info(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(dTime)) + " last time " + str(
-                dFile) + " is vied berfore delete")
+                dFile) + " is viewed before delete")
 
 
 # ___________________________________________________________________________________________________
