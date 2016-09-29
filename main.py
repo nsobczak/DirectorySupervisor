@@ -2,7 +2,7 @@
 # TP1 #
 #######
 
-# TODO : Remplacer les noms des fonctions arbre par des noms français + créer fonction loop
+# TODO : Remplacer les noms des fonctions arbre par des noms francais + creer fonction loop
 # ____________________________________________________________________________________________________
 # Config
 
@@ -41,13 +41,13 @@ def initLog(logPath):
         datefmt="%d/%m/%Y-%H:%M:%S", \
         format="%(asctime)s %(levelname)s %(funcName)s %(message)s", \
         level=logging.INFO)  # 'filename': '/path/to/DirectorySupervisor.debug.log',
-    logging.info("Programme lancé")
+    logging.info("Programme lance")
 
 
 def initVariablesGlobales():
     """
     Fonction qui initialise les variables globales en fonction de ce que l'utilisateur a entre.
-    La fonction genere une info récapitulant la liste des parametres entres.
+    La fonction genere une info recapitulant la liste des parametres entres.
     """
     global dp
     global lp
