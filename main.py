@@ -57,14 +57,14 @@ def initVariablesGlobales():
     global startinglevel
     global arbrePrecedent
 
-    parser = argparse.ArgumentParser(description='Supervision de dossier')
+    parser = argparse.ArgumentParser(description='Supervision de dossier with DirectorySupervisor')
     # obligatoire
     parser.add_argument("dp", type=str, help="path to the directory")
     parser.add_argument("lp", type=str, help="path where to generate log")
     # optionnel
-    parser.add_argument("-d", "--depth", default=2, help="depth of the surpervision directory")
-    parser.add_argument("-f", "--frequence", default=1, help="add supervision frequency in hz")
-    parser.add_argument("-st", "--supervisionTime", default=60, help="add supervision time (in s)")
+    parser.add_argument("-d", "--depth", default=2, help="depth of the surpervision directory, default = 2")
+    parser.add_argument("-f", "--frequence", default=1, help="add supervision frequency in hz, default = 1 hz")
+    parser.add_argument("-st", "--supervisionTime", default=60, help="add supervision time (in sec), default = 60 sec")
 
     # initialisation des parametres globaux
     args = parser.parse_args()
@@ -80,8 +80,8 @@ def initVariablesGlobales():
 def afficheArgument():
     """affichage des arguments rentres"""
     logging.info(
-        ":\npath to the directory : %s \npath where to generate log : %s \ndepth of the directory : %s \nfrequency : %s hz\n",
-        dp, lp, depth, frequence)
+        ":\npath to the directory : %s \npath where to generate log : %s \ndepth of the directory : %s \nfrequency : %s hz \nsupervision time : %s sec\n",
+        dp, lp, depth, frequence, supervisionTime)
 
 
 # ___________________________________________________________________________________________________
