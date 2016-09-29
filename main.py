@@ -97,9 +97,9 @@ def createSurveyList(tree):
         path, dirs, files = tree[i]
         level = path.count(os.sep) - startinglevel
         if (level <= depth):
-            logging.debug('### depth ' + str(level) + ' ### ' + str(path) + ' #####')
-            logging.debug("Sous dossiers : %s" % dirs)
-            logging.debug("Fichiers : %s" % files)
+            # logging.info('### depth ' + str(level) + ' ### ' + str(path) + ' #####')
+            # logging.info("Sous dossiers : %s" % dirs)
+            # logging.info("Fichiers : %s" % files)
             for dir in dirs:
                 modifTime = os.path.getmtime(os.path.join(path, dir))
                 listOfModifFiles += [(path + '/' + dir, modifTime)]
@@ -184,7 +184,7 @@ def loop():
     while totalTime < (supervisionTime*frequence):
         newTime = time.time()
         if (newTime - oldTime) > (1 / frequence):
-            logging.debug(str(totalTime / frequence) + " sec depuis lancement du programme")
+            # logging.info(str(totalTime / frequence) + " sec depuis lancement du programme")
             oldTime = time.time()
             nouvelArbre = createSurveyList(list(os.walk(dp)))
             M, A, D = comparateSurveyList(arbrePrecedent, nouvelArbre)
