@@ -62,8 +62,8 @@ def initVariablesGlobales():
     parser.add_argument("dp", type=str, help="path to the directory")
     parser.add_argument("lp", type=str, help="path where to generate log")
     # optionnel
-    parser.add_argument("-d", "--depth", default=2, help="depth of the directory")
-    parser.add_argument("-f", "--frequence", default=1, help="add frequency in hz")
+    parser.add_argument("-d", "--depth", default=2, help="depth of the surpervision directory")
+    parser.add_argument("-f", "--frequence", default=1, help="add supervision frequency in hz")
     parser.add_argument("-st", "--supervisionTime", default=60, help="add supervision time (in s)")
 
     # initialisation des parametres globaux
