@@ -1,5 +1,4 @@
 # DirectorySupervisor
-Python course - TP01
 
 ## What is DirectorySupervisor ?
 DirectorySupervisor is a commandline program that generate log files to supervise the activity of a directory.
@@ -11,12 +10,12 @@ but = superviser un dossier
 
 ## parametres
 
-- nom du dossier : -dp (directory path)
-- fréquence de supervision : -f
-- chemin du fichier de log : -lp (log path)
-- profondeur de recherche (y'a des dossiers dans les dossiers) : -d (depth)
-- extension des fichiers à exclure? (=optionnel) : -?
-- extension des fichiers à analyser ? (=optionnel) : -?
+|Nom du paramètre|commande du paramètre|
+|---|---|
+|nom du dossier|-dp (directory path)|
+|fréquence de supervision|-f|
+|chemin du fichier de log|-lp (log path)|
+|profondeur de recherche (y'a des dossiers dans les dossiers)|-d (depth)|
 
 on ne sait pas ce qu'il y a dans les dossiers
 
